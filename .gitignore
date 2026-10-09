@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Poetry virtual environment
+.venv/
+
+# Datasets (downloaded by scripts/01_download_data.py)
+data/raw/
+
+# Outputs of the --quick smoke tests
+results/quick/

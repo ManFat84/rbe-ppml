@@ -1,0 +1,107 @@
+{
+  "settings": {
+    "lr": {
+      "test_size": 0.2,
+      "split_seed": 42,
+      "epochs": 80,
+      "batch_size": 64,
+      "learning_rate": 0.2,
+      "shuffle_seed": 0,
+      "sigmoid_degree": 3,
+      "sigmoid_range": 8.0
+    },
+    "rbe": {
+      "ell": 3,
+      "modulus": "186352893616305752009809553998357101701356381571265282751002049262735193014273",
+      "frac_bits": 16,
+      "const_exp": 2,
+      "seed": 2026
+    }
+  },
+  "results": [
+    {
+      "dataset": "breast_cancer",
+      "shape": [
+        569,
+        30
+      ],
+      "n_train": 455,
+      "n_test": 114,
+      "epochs": 80,
+      "sgd_updates": 640,
+      "refreshes": 19840,
+      "max_scale_exponent": 11,
+      "unencrypted": {
+        "acc": 0.9385964912280702,
+        "auc": 0.9990079365079365,
+        "mse": 0.04859447581387885
+      },
+      "polynomial_plaintext": {
+        "acc": 0.9385964912280702,
+        "auc": 0.9983465608465608,
+        "mse": 0.05751019247232575
+      },
+      "encrypted": {
+        "acc": 0.9385964912280702,
+        "auc": 0.9983465608465608,
+        "mse": 0.05750988919661779
+      },
+      "max_abs_param_diff_encrypted_vs_polynomial": 0.0001694499796009996,
+      "prediction_agreement_encrypted_vs_polynomial": 1.0,
+      "time_s": {
+        "key_generation": 0.006678499999907217,
+        "baseline_training": 0.03727619999972376,
+        "dataset_encryption": 14.630459100000735,
+        "encrypted_training_cloud": 44.090483599992695,
+        "refresh_key_owner": 21.65760459991725,
+        "encrypted_training_total": 66.0069341999997,
+        "encrypted_inference_test_set": 0.06593389999943611,
+        "decryption_test_set": 0.04111789999933535,
+        "total_encrypted_pipeline": 80.75112359999912,
+        "encryption_overhead": 80.7138473999994
+      }
+    },
+    {
+      "dataset": "heart_disease",
+      "shape": [
+        303,
+        13
+      ],
+      "n_train": 242,
+      "n_test": 61,
+      "epochs": 80,
+      "sgd_updates": 320,
+      "refreshes": 4480,
+      "max_scale_exponent": 11,
+      "unencrypted": {
+        "acc": 0.8524590163934426,
+        "auc": 0.9285714285714286,
+        "mse": 0.11196992983989133
+      },
+      "polynomial_plaintext": {
+        "acc": 0.819672131147541,
+        "auc": 0.9242424242424243,
+        "mse": 0.1165315561454585
+      },
+      "encrypted": {
+        "acc": 0.819672131147541,
+        "auc": 0.9242424242424243,
+        "mse": 0.11653218326637453
+      },
+      "max_abs_param_diff_encrypted_vs_polynomial": 0.00012069478051834892,
+      "prediction_agreement_encrypted_vs_polynomial": 1.0,
+      "time_s": {
+        "key_generation": 0.007120499999473395,
+        "baseline_training": 0.011444400000073074,
+        "dataset_encryption": 3.4408611999997447,
+        "encrypted_training_cloud": 8.884506499993222,
+        "refresh_key_owner": 4.7113417000146,
+        "encrypted_training_total": 13.656854000000749,
+        "encrypted_inference_test_set": 0.019752799999878334,
+        "decryption_test_set": 0.021923100000094564,
+        "total_encrypted_pipeline": 17.14651159999994,
+        "encryption_overhead": 17.135067199999867
+      }
+    }
+  ]
+}

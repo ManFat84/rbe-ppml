@@ -1,0 +1,28 @@
+[project]
+name = "rbe-ppml"
+version = "0.1.0"
+description = "RBE-based privacy-preserving machine learning: logistic regression and linear SVM"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "numpy (>=2.1)",
+    "pandas (>=2.2)",
+    "scikit-learn (>=1.6)",
+    "scikit-image (>=0.25)",
+    "matplotlib (>=3.9)",
+    "tqdm (>=4.66)",
+]
+
+[tool.poetry]
+packages = [
+    { include = "rbe", from = "src" },
+    { include = "rbe_ppml", from = "src" },
+]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

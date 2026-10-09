@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "svm": {
+      "classes": [
+        0,
+        1
+      ],
+      "hog_orientations": 9,
+      "hog_pixels_per_cell": 8,
+      "hog_cells_per_block": 2,
+      "pca_components": 64,
+      "C": 1.0,
+      "encrypt_model": true
+    },
+    "rbe": {
+      "ell": 3,
+      "modulus": "186352893616305752009809553998357101701356381571265282751002049262735193014273",
+      "frac_bits": 16,
+      "const_exp": 2,
+      "seed": 2026
+    }
+  },
+  "results": {
+    "classes": [
+      "airplane",
+      "automobile"
+    ],
+    "n_train": 10000,
+    "n_test": 2000,
+    "hog_dim": 324,
+    "pca_dim": 64,
+    "pca_explained_variance": 0.8098208891833683,
+    "encrypted_model": true,
+    "plaintext_acc": 0.8895,
+    "encrypted_acc": 0.8895,
+    "prediction_agreement": 1.0,
+    "max_abs_score_diff": 0.00012718600407790603,
+    "time_s": {
+      "features_hog_pca": 5.81839459999992,
+      "svm_training": 3.243737599999804,
+      "key_generation": 0.005727400000068883,
+      "test_feature_encryption": 108.33273659999941,
+      "model_encryption": 0.06400120000034804,
+      "encrypted_inference": 2.4318082999998296,
+      "decryption": 0.5775915999993231
+    }
+  }
+}

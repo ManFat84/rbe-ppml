@@ -1,10 +1,9 @@
 # RBE-based privacy-preserving machine learning
 
 Python implementation of Section III ("Privacy-Preserving Based on RBE Technique") of the paper
-*RBE-based privacy-preserving machine learning model* (Mansour, Laouid, Ferik, Bounceur, Hammoudeh, Chait):
+*RBE-based privacy-preserving machine learning model* (Mansour Fathi, Laouid Abdelkader):
 
-- logistic regression (LR) trained and evaluated on RBE-encrypted data: breast cancer and heart disease (Tables II and III);
-- linear-SVM inference on RBE-encrypted CIFAR-10 features (Table IV);
+- logistic regression (LR) trained and evaluated on RBE-encrypted data: breast cancer and heart disease - linear-SVM inference on RBE-encrypted CIFAR-10 features ;
 - the sigmoid / Chebyshev approximation plot (Fig. 2).
 
 The RBE scheme is the original implementation in `src/rbe/` (`base.py`, `utils.py`, `types.py`, `toy_fhe.py`),
@@ -26,9 +25,9 @@ rbe-ppml/
 ├── scripts/                run them in this order
 │   ├── 01_download_data.py
 │   ├── 02_check_rbe.py
-│   ├── 03_plot_sigmoid_approximation.py    Fig. 2
-│   ├── 04_run_logistic_regression.py       Tables II and III
-│   └── 05_run_svm_cifar10.py               Table IV
+│   ├── 03_plot_sigmoid_approximation.py    
+│   ├── 04_run_logistic_regression.py       
+│   └── 05_run_svm_cifar10.py               
 ├── src/
 │   ├── rbe/                original RBE implementation (unchanged)
 │   └── rbe_ppml/           implementation of the paper's method
@@ -73,8 +72,8 @@ poetry run pytest                                            # automated checks,
 poetry run python scripts/01_download_data.py                # datasets -> data/raw/ (CIFAR-10: 163 MB)
 poetry run python scripts/02_check_rbe.py                    # RBE sanity checks
 poetry run python scripts/03_plot_sigmoid_approximation.py   # Fig. 2 -> results/figures/
-poetry run python scripts/04_run_logistic_regression.py      # Tables II-III, about 1-2 min
-poetry run python scripts/05_run_svm_cifar10.py              # Table IV, about 2-3 min
+poetry run python scripts/04_run_logistic_regression.py      
+poetry run python scripts/05_run_svm_cifar10.py              
 ```
 
 Options: `04_... --dataset breast_cancer` (one dataset), `--quick` on scripts 04 and 05 (short smoke test,
@@ -88,7 +87,7 @@ Each experiment writes a JSON file (all numbers) and a Markdown file (tables in 
 Environment: Linux, 1 CPU core, Python 3.12.3, numpy 2.4.4, scikit-learn 1.8.0, scikit-image 0.26.0.
 Runtimes depend on the processor; the paper used an Intel i5-6300MQ with Python 3.14.0.
 
-Table III - LR metrics on the test set (114 and 61 samples), 80 epochs:
+ LR metrics on the test set (114 and 61 samples), 80 epochs:
 
 | Dataset | Model | ACC | AUC | MSE |
 |---|---|---|---|---|
@@ -106,7 +105,7 @@ by at most 1.7e-4 (fixed-point rounding at 2^-16) and all test predictions are i
 between the unencrypted and the encrypted columns is therefore due to the polynomial approximation of the
 sigmoid, not to the RBE computation.
 
-Table II - LR runtime (s):
+LR runtime (s):
 
 | Metric | Breast cancer | Heart disease | Paper (BC / HD) |
 |---|---|---|---|
@@ -117,8 +116,7 @@ Table II - LR runtime (s):
 | encrypted training, total | 48.20 | 9.87 | 18.84 / 9.70 |
 | encrypted inference, whole test set | 0.05 | 0.01 | - |
 | total encrypted pipeline | 58.56 | 12.32 | 18.96 / 9.72 |
-
-Table IV - linear SVM on CIFAR-10, airplane vs automobile (10,000 training / 2,000 test images,
+linear SVM on CIFAR-10, airplane vs automobile (10,000 training / 2,000 test images,
 HOG 324 -> PCA 64 features, explained variance 0.810; w and b encrypted):
 
 | | Plaintext ACC | Training time (s) | Encrypted ACC | Inference latency (s) |
@@ -135,13 +133,13 @@ decryption of the scores 0.53 s, agreement between encrypted and plaintext predi
 
 | Paper | Code |
 |---|---|
-| RBE over Z_n, l = 3, regulator k^-l (III-A) | `config.RBEConfig`, `crypto.RBEScheme` (subclass of `ToyFHEncryptor`) |
+| RBE over Z_n, l = 3, regulator k^-l  | `config.RBEConfig`, `crypto.RBEScheme` (subclass of `ToyFHEncryptor`) |
 | fixed-point encoding with a scaling factor (III-A) | `crypto.CloudContext.encode`, `crypto.EncryptedNumber` |
-| encrypted dataset Enc(Z) (N x F x l) and encrypted labels (III-B) | `DataOwner.encrypt_matrix`, `DataOwner.encrypt_vector` |
+| encrypted dataset Enc(Z) (N x F x l) and encrypted labels  | `DataOwner.encrypt_matrix`, `DataOwner.encrypt_vector` |
 | degree-3 Chebyshev sigmoid, Horner's method (III-B, Fig. 2) | `sigmoid.ChebyshevSigmoid` |
-| encrypted SGD: ciphertext-weight products, homomorphic aggregation (III-B) | `logistic_regression.EncryptedLogisticRegression` |
-| HOG -> PCA (64) -> linear SVM trained in plaintext (III-C) | `svm.hog_features`, `svm.train_linear_svm` |
-| encrypted decision function w Enc(z) + b (III-C) | `svm.encrypted_decision_function` |
+| encrypted SGD: ciphertext-weight products, homomorphic aggregation | `logistic_regression.EncryptedLogisticRegression` |
+| HOG -> PCA (64) -> linear SVM trained in plaintext  | `svm.hog_features`, `svm.train_linear_svm` |
+| encrypted decision function w Enc(z) + b  | `svm.encrypted_decision_function` |
 
 Parameters not stated in the paper (all in `config.py`): fixed-point precision Delta = 2^16; Chebyshev fit on
 z in [-8, 8] (scaled input u = z/8 in [-1, 1]); min-max normalisation fitted on the training split; median
@@ -185,13 +183,3 @@ These do not change the accuracy or runtime results.
   and the regulator, which the cloud needs for multiplication. In a test, the plaintexts 3.14, -2.5, 0.07 and
   123.45 were recovered exactly from their ciphertexts without the secret key.
 
-## 8. Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| `ModuleNotFoundError: No module named 'rbe'` or `'rbe_ppml'` | check the `packages` lines in `pyproject.toml`, then `poetry install` |
-| strange errors mentioning `types` | a file inside `src/rbe/` was run directly; run the scripts instead |
-| `poetry.lock` is out of date warning | `poetry lock`, then `poetry install` |
-| CIFAR-10 download slow or interrupted | run script 01 again (it resumes), or download the archive manually into `data/raw/` |
-| package installation fails on Python 3.15 | install Python 3.13 or 3.14, then `poetry env use (py -3.13 -c "import sys; print(sys.executable)")` and `poetry install` |
-| an experiment takes too long | first try `--quick` |

@@ -77,7 +77,7 @@ poetry run python scripts/05_run_svm_cifar10.py
 ```
 
 Options: `04_... --dataset breast_cancer` (one dataset), `--quick` on scripts 04 and 05 (short smoke test,
-results in `results/quick/`), `05_... --plain-model` (only the images are encrypted, w and b stay in plaintext).
+results in `results/quick/`), `05_... --plain-model` 
 
 Each experiment writes a JSON file (all numbers) and a Markdown file (tables in the layout of the paper) to
 `results/`.

@@ -65,7 +65,7 @@ Dependencies: `poetry add numpy pandas scikit-learn scikit-image matplotlib tqdm
 
 ## 3. Running the experiments
 
-From the project folder (VS Code: Terminal > New Terminal):
+
 
 ```powershell
 poetry run pytest                                            # automated checks, a few seconds
